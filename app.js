@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const https = require("https");
 const favicon = require("serve-favicon");
-const secrets = require("./test.js");
+const env = require("./env.js");
 
 const app = express();
 app.use(express.static("public"));
@@ -33,10 +33,10 @@ app.post("/", function (req, res) {
 	};
 
 	const jsonData = JSON.stringify(data);
-	const url = "https://us21.api.mailchimp.com/3.0/lists/" + secrets.LISTID;
+	const url = "https://us21.api.mailchimp.com/3.0/lists/" + env.LISTID;
 	const options = {
 		method: "POST",
-		auth: "j-kenneth:" + secrets.APIKEY,
+		auth: "j-kenneth:" + env.APIKEY,
 	};
 
 	const request = https.request(url, options, function (response) {
